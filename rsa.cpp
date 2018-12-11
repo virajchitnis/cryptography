@@ -2,12 +2,14 @@
 
 using namespace std;
 
+const int k = 2;
+
 bool isCoPrime(int x, int y);
 bool isNumberPrime(int n);
 
 int main() {
   // Get two prime numbers
-  int p = 0, q = 0, n, phi_n, e;
+  int p = 0, q = 0, n, phi_n, e, d;
   do {
     cout << "Enter first prime number: ";
     cin >> p;
@@ -31,7 +33,7 @@ int main() {
   // Select an e value
   e = 2;
   while (e < phi_n) {
-    // e must be co-prime to n and phi_n and smaller than phi_n.
+    // e must be co-prime to n and Φ(n) and smaller than Φ(n).
     if (isCoPrime(e, n) && isCoPrime(e, phi_n)) {
       break;
     }
@@ -40,7 +42,10 @@ int main() {
     }
   }
 
-  cout << "p = " << p << ", q = " << q << ", n = " << n << ", \u03A6(n) = " << phi_n << ", e = " << e << endl;
+  // Calculate d
+  d = ((k * phi_n) + 1) / e;
+
+  cout << "p = " << p << ", q = " << q << ", n = " << n << ", \u03A6(n) = " << phi_n << ", e = " << e << ", d = " << d << endl;
 }
 
 bool isCoPrime(int x, int y) {
