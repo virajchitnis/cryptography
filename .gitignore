@@ -31,6 +31,7 @@
 *.out
 *.app
 rsa
+primenumber
 
 # Test files
 test_files/
