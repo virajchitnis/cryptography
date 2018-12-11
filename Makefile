@@ -15,8 +15,14 @@ all: rsa
 run: all
 	./rsa
 
-rsa: rsa.cpp
-	$(CC) $(CFLAGS) -o rsa rsa.cpp
+rsa: rsa.o Calc.o
+	$(CC) $(CFLAGS) -o rsa rsa.o Calc.o
+
+rsa.o: Calc.o rsa.cpp
+	$(CC) $(CFLAGS) -c rsa.cpp
+
+Calc.o: Calc.h Calc.cpp
+	$(CC) $(CFLAGS) -c Calc.cpp
 
 # Clean the entire project
 clean:

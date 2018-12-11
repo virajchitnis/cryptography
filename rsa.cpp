@@ -1,11 +1,9 @@
 #include <iostream>
+#include "Calc.h"
 
 using namespace std;
 
 const int k = 2;
-
-bool isCoPrime(int x, int y);
-bool isNumberPrime(int n);
 
 int main() {
   // Get two prime numbers
@@ -13,17 +11,17 @@ int main() {
   do {
     cout << "Enter first prime number: ";
     cin >> p;
-    if (!isNumberPrime(p)) {
+    if (!Calc::isNumberPrime(p)) {
       cout << p << " is not prime, try again." << endl;
     }
-  } while (!isNumberPrime(p));
+  } while (!Calc::isNumberPrime(p));
   do {
     cout << "Enter second prime number: ";
     cin >> q;
-    if (!isNumberPrime(q)) {
+    if (!Calc::isNumberPrime(q)) {
       cout << q << " is not prime, try again." << endl;
     }
-  } while (!isNumberPrime(q));
+  } while (!Calc::isNumberPrime(q));
 
   // Compute n
   n = p * q;
@@ -34,7 +32,7 @@ int main() {
   e = 2;
   while (e < phi_n) {
     // e must be co-prime to n and Φ(n) and smaller than Φ(n).
-    if (isCoPrime(e, n) && isCoPrime(e, phi_n)) {
+    if (Calc::isCoPrime(e, n) && Calc::isCoPrime(e, phi_n)) {
       break;
     }
     else {
@@ -58,25 +56,6 @@ int main() {
   }
 
   cout << "Encrypted message: " << cmsg << endl;
-}
 
-bool isCoPrime(int x, int y) {
-  if (y%x == 0) {
-    return false;
-  }
-  return true;
-}
-
-bool isNumberPrime(int n) {
-  if (n == 0) {
-    return false;
-  }
-  else {
-    for(int i = 2; i < n; i++) {
-      if (n % i == 0) {
-        return false;
-      }
-    }
-  }
-  return true;
+  return 0;
 }
