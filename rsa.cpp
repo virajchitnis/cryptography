@@ -46,6 +46,18 @@ int main() {
   d = ((k * phi_n) + 1) / e;
 
   cout << "p = " << p << ", q = " << q << ", n = " << n << ", \u03A6(n) = " << phi_n << ", e = " << e << ", d = " << d << endl;
+
+  string msg, cmsg = "";
+  cout << "Enter message: ";
+  cin >> msg;
+  for (char m : msg) {
+    int c = (int(m) ^ e) % n;
+    char c_char = char(c);
+    cmsg.push_back(c_char);
+    cout << m << ", ASCII value: " << int(m) << ", encrypted ASCII: " << c << ", encrypted character: " << c_char << endl;
+  }
+
+  cout << "Encrypted message: " << cmsg << endl;
 }
 
 bool isCoPrime(int x, int y) {
