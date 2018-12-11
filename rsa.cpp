@@ -6,7 +6,7 @@ bool isNumberPrime(int n);
 
 int main() {
   // Get two prime numbers
-  int p = 0, q = 0, n;
+  int p = 0, q = 0, n, phi_n;
   do {
     cout << "Enter first prime number: ";
     cin >> p;
@@ -23,8 +23,9 @@ int main() {
   } while (!isNumberPrime(q));
 
   n = p * q;
+  phi_n = (p - 1) * (q - 1);
 
-  cout << "p = " << p << ", q = " << q << ", n = " << n << endl;
+  cout << "p = " << p << ", q = " << q << ", n = " << n << ", \u03A6(n) = " << phi_n << endl;
 }
 
 bool isNumberPrime(int n) {
