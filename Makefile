@@ -9,7 +9,7 @@ CC=$(CXX)
 CFLAGS=$(CXXFLAGS)
 
 # Compile the entire project
-all: rsa primenumber
+all: rsa primenumber main
 
 rsa: rsa.o Calc.o
 	$(CC) $(CFLAGS) -o rsa rsa.o Calc.o
@@ -23,8 +23,17 @@ primenumber.o: Calc.o primenumber.cpp
 rsa.o: Calc.o rsa.cpp
 	$(CC) $(CFLAGS) -c rsa.cpp
 
+main: main.o CaesarCipher.o
+	$(CC) $(CFLAGS) -o main main.o CaesarCipher.o
+
+main.o: CaesarCipher.o main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
+
 Calc.o: Calc.h Calc.cpp
 	$(CC) $(CFLAGS) -c Calc.cpp
+
+CaesarCipher.o: CaesarCipher.h CaesarCipher.cpp
+	$(CC) $(CFLAGS) -c CaesarCipher.cpp
 
 # Clean the entire project
 clean:

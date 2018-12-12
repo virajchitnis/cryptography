@@ -32,6 +32,7 @@
 *.app
 rsa
 primenumber
+main
 
 # Test files
 test_files/
