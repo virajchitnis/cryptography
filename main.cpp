@@ -4,18 +4,31 @@
  */
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "CaesarCipher.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  cout << "Enter string to encrypt> ";
+  string file_name;
+  if (argc <= 1) {
+    cout << "Enter file name> ";
+    cin >> file_name;
+  }
+  else {
+    file_name = argv[1];
+  }
+  ifstream ifs(file_name);
   string message;
-  cin >> message;
+  message.assign(istreambuf_iterator<char>(ifs), istreambuf_iterator<char>());
+
+  cout << "\033[1;32mOriginal message:\033[0m " << endl << endl;
+  cout << message << endl;
   CaesarCipher *cc = new CaesarCipher();
-  string e_message = cc->encrypt(message, 5);
-  cout << "Encrypted message: " << e_message << endl;
-  string d_message = cc->decrypt(e_message, 5);
-  cout << "Decrypted message: " << d_message << endl;
+  string e_message = cc->encrypt(message, 15);
+  cout << "\033[1;32mEncrypted message:\033[0m " << endl << endl << e_message << endl;
+  string d_message = cc->decrypt(e_message, 15);
+  cout << "\033[1;32mDecrypted message:\033[0m " << endl << endl << d_message << endl;
   return 0;
 }
