@@ -5,10 +5,6 @@
 
 #include "CaesarCipher.h"
 
-CaesarCipher::CaesarCipher() {
-  // Do nothing.
-}
-
 string CaesarCipher::encrypt(string message, int key) {
   string ret = "";
   for (char c : message) {

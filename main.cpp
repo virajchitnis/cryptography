@@ -25,10 +25,9 @@ int main(int argc, char const *argv[]) {
 
   cout << "\033[1;32mOriginal message:\033[0m " << endl << endl;
   cout << message << endl;
-  CaesarCipher *cc = new CaesarCipher();
-  string e_message = cc->encrypt(message, 15);
+  string e_message = CaesarCipher::encrypt(message, 15);
   cout << "\033[1;32mEncrypted message:\033[0m " << endl << endl << e_message << endl;
-  string d_message = cc->decrypt(e_message, 15);
+  string d_message = CaesarCipher::decrypt(e_message, 15);
   cout << "\033[1;32mDecrypted message:\033[0m " << endl << endl << d_message << endl;
   return 0;
 }

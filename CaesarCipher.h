@@ -13,8 +13,7 @@ using namespace std;
 #define CAESARCIPHER
 class CaesarCipher {
 public:
-  CaesarCipher();
-  string encrypt(string message, int key);
-  string decrypt(string code, int key);
+  static string encrypt(string message, int key);
+  static string decrypt(string code, int key);
 };
 #endif
