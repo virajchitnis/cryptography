@@ -16,13 +16,14 @@ string CaesarCipher::encrypt(string message, int key) {
     if (isCapital) {
       c = tolower(c);
     }
-    int loc = location_of_character(c);
+    CodeBook *cb = new CodeBook();
+    int loc = cb->location_of_character(c);
     if (loc > -1) {
       int new_loc = (loc + key) % 26;
       if (new_loc < 0) {
         new_loc += 26;
       }
-      char e_c = _book[new_loc];
+      char e_c = cb->char_at_location(new_loc);
       if (isCapital) {
         e_c = toupper(e_c);
       }
@@ -42,13 +43,14 @@ string CaesarCipher::decrypt(string code, int key) {
     if (isCapital) {
       c = tolower(c);
     }
-    int loc = location_of_character(c);
+    CodeBook *cb = new CodeBook();
+    int loc = cb->location_of_character(c);
     if (loc > -1) {
       int new_loc = ((loc - key) % 26);
       if (new_loc < 0) {
         new_loc += 26;
       }
-      char d_c = _book[new_loc];
+      char d_c = cb->char_at_location(new_loc);
       if (isCapital) {
         d_c = toupper(d_c);
       }
@@ -59,13 +61,4 @@ string CaesarCipher::decrypt(string code, int key) {
     }
   }
   return ret;
-}
-
-int CaesarCipher::location_of_character(char c) {
-  for (int i = 0; i < 26; i++) {
-    if (_book[i] == c) {
-      return i;
-    }
-  }
-  return -1;
 }
