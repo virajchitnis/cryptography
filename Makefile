@@ -23,8 +23,8 @@ primenumber.o: Calc.o primenumber.cpp
 rsa.o: Calc.o rsa.cpp
 	$(CC) $(CFLAGS) -c rsa.cpp
 
-main: main.o CaesarCipher.o CodeBook.o
-	$(CC) $(CFLAGS) -o main main.o CaesarCipher.o CodeBook.o
+main: main.o CaesarCipher.o CodeBook.o VigenereCipher.o
+	$(CC) $(CFLAGS) -o main main.o CaesarCipher.o CodeBook.o VigenereCipher.o
 
 main.o: CaesarCipher.o main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
@@ -37,6 +37,9 @@ CaesarCipher.o: CaesarCipher.h CaesarCipher.cpp CodeBook.o
 
 CodeBook.o: CodeBook.h CodeBook.cpp
 	$(CC) $(CFLAGS) -c CodeBook.cpp
+
+VigenereCipher.o: VigenereCipher.h VigenereCipher.cpp
+	$(CC) $(CFLAGS) -c VigenereCipher.cpp
 
 # Clean the entire project
 clean:
