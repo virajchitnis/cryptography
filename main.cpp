@@ -33,6 +33,8 @@ int main(int argc, char const *argv[]) {
 
   string v_message = VigenereCipher::encrypt(message, "SMITHO");
   cout << "\033[1;32mEncrypted with Vigenere Cipher:\033[0m " << endl << endl << v_message << endl;
+  string vd_message = VigenereCipher::decrypt(v_message, "SMITHO");
+  cout << "\033[1;32mDecrypted with Vigenere Cipher:\033[0m " << endl << endl << vd_message << endl;
 
   return 0;
 }

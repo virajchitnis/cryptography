@@ -45,5 +45,6 @@ VigenereCipher.o: VigenereCipher.h VigenereCipher.cpp
 clean:
 	-rm rsa
 	-rm primenumber
+	-rm main
 	-rm *.o
 	-rm -r *.dSYM

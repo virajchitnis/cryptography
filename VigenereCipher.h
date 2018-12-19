@@ -15,6 +15,6 @@ using namespace std;
 class VigenereCipher {
 public:
   static string encrypt(string message, string key);
-  static string decrypt(string code, string key);
+  static string decrypt(string message, string key);
 };
 #endif
