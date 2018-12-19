@@ -15,7 +15,10 @@ string VigenereCipher::encrypt(string message, string key) {
   string columns[key_len];
   for (int i = 0; i < message_len; i += key_len) {
     for (int j = 0; j < key_len; j++) {
-      columns[j].push_back(message[i+j]);
+      int tot_loc = i + j;
+      if (tot_loc < message_len) {
+        columns[j].push_back(message[tot_loc]);
+      }
     }
   }
 
