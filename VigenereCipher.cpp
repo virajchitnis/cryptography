@@ -3,7 +3,7 @@
 string VigenereCipher::encrypt(string message, string key) {
   string ret = "";
   int message_len = message.length(), key_len = key.length();
-  int keys[key_len];
+  int *keys = new int[key_len];
 
   CodeBook *cb = new CodeBook();
 
@@ -12,7 +12,7 @@ string VigenereCipher::encrypt(string message, string key) {
     keys[i] = cb->location_of_character(k);
   }
 
-  string columns[key_len];
+  string *columns = new string[key_len];
   for (int i = 0; i < message_len; i += key_len) {
     for (int j = 0; j < key_len; j++) {
       int tot_loc = i + j;
@@ -22,7 +22,7 @@ string VigenereCipher::encrypt(string message, string key) {
     }
   }
 
-  string e_columns[key_len];
+  string *e_columns = new string[key_len];
   for (int i = 0; i < key_len; i++) {
     e_columns[i] = CaesarCipher::encrypt(columns[i], keys[i]);
   }
@@ -43,7 +43,7 @@ string VigenereCipher::encrypt(string message, string key) {
 string VigenereCipher::decrypt(string message, string key) {
   string ret = "";
   int message_len = message.length(), key_len = key.length();
-  int keys[key_len];
+  int *keys = new int[key_len];
 
   CodeBook *cb = new CodeBook();
 
@@ -52,7 +52,7 @@ string VigenereCipher::decrypt(string message, string key) {
     keys[i] = cb->location_of_character(k);
   }
 
-  string columns[key_len];
+  string *columns = new string[key_len];
   for (int i = 0; i < message_len; i += key_len) {
     for (int j = 0; j < key_len; j++) {
       int tot_loc = i + j;
@@ -62,7 +62,7 @@ string VigenereCipher::decrypt(string message, string key) {
     }
   }
 
-  string e_columns[key_len];
+  string *e_columns = new string[key_len];
   for (int i = 0; i < key_len; i++) {
     e_columns[i] = CaesarCipher::decrypt(columns[i], keys[i]);
   }
