@@ -15,13 +15,22 @@ ifeq ($(UNAME_S),Linux)
 endif
 
 # Compile the entire project
-all: rsa primenumber main
+default: rsa primenumber main
+
+# Compile the entire project for Windows
+build_windows: rsa.exe primenumber.exe main.exe
 
 rsa: rsa.o Calc.o
 	$(CC) $(CFLAGS) -o rsa rsa.o Calc.o
 
+rsa.exe: rsa.o Calc.o
+	$(CC) $(CFLAGS) -o rsa.exe rsa.o Calc.o
+
 primenumber: primenumber.o Calc.o
 	$(CC) $(CFLAGS) -o primenumber primenumber.o Calc.o
+
+primenumber.exe: primenumber.o Calc.o
+	$(CC) $(CFLAGS) -o primenumber.exe primenumber.o Calc.o
 
 primenumber.o: Calc.o primenumber.cpp
 	$(CC) $(CFLAGS) -c primenumber.cpp
@@ -31,6 +40,9 @@ rsa.o: Calc.o rsa.cpp
 
 main: main.o CaesarCipher.o CodeBook.o VigenereCipher.o
 	$(CC) $(CFLAGS) -o main main.o CaesarCipher.o CodeBook.o VigenereCipher.o
+
+main.exe: main.o CaesarCipher.o CodeBook.o VigenereCipher.o
+	$(CC) $(CFLAGS) -o main.exe main.o CaesarCipher.o CodeBook.o VigenereCipher.o
 
 main.o: CaesarCipher.o main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
