@@ -26,19 +26,11 @@
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
-rsa
-primenumber
-main
+# Output directory
+Output/
 
 # Test files
 test_files/
-
-# Error files
-*.dSYM/
 
 # Vagrant files
 .vagrant

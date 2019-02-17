@@ -15,55 +15,61 @@ ifeq ($(UNAME_S),Linux)
 endif
 
 # Compile the entire project
-default: rsa primenumber main
+default: dirs Output/bin/rsa Output/bin/primenumber Output/bin/main
 
 # Compile the entire project for Windows
-build_windows: rsa.exe primenumber.exe main.exe
+build_windows: dirs Output/bin/rsa.exe Output/bin/primenumber.exe Output/bin/main.exe
 
-rsa: rsa.o Calc.o
-	$(CC) $(CFLAGS) -o rsa rsa.o Calc.o
+Output/bin/rsa: Output/obj/rsa.o Output/obj/Calc.o
+	$(CC) $(CFLAGS) -o Output/bin/rsa Output/obj/rsa.o Output/obj/Calc.o
 
-rsa.exe: rsa.o Calc.o
-	$(CC) $(CFLAGS) -o rsa.exe rsa.o Calc.o
+Output/bin/rsa.exe: Output/obj/rsa.o Output/obj/Calc.o
+	$(CC) $(CFLAGS) -o Output/bin/rsa.exe Output/obj/rsa.o Output/obj/Calc.o
 
-primenumber: primenumber.o Calc.o
-	$(CC) $(CFLAGS) -o primenumber primenumber.o Calc.o
+Output/bin/primenumber: Output/obj/primenumber.o Output/obj/Calc.o
+	$(CC) $(CFLAGS) -o Output/bin/primenumber Output/obj/primenumber.o Output/obj/Calc.o
 
-primenumber.exe: primenumber.o Calc.o
-	$(CC) $(CFLAGS) -o primenumber.exe primenumber.o Calc.o
+Output/bin/primenumber.exe: Output/obj/primenumber.o Output/obj/Calc.o
+	$(CC) $(CFLAGS) -o Output/bin/primenumber.exe Output/obj/primenumber.o Output/obj/Calc.o
 
-primenumber.o: Calc.o primenumber.cpp
-	$(CC) $(CFLAGS) -c primenumber.cpp
+Output/obj/primenumber.o: Output/obj/Calc.o primenumber.cpp
+	$(CC) $(CFLAGS) -o Output/obj/primenumber.o -c primenumber.cpp
 
-rsa.o: Calc.o rsa.cpp
-	$(CC) $(CFLAGS) -c rsa.cpp
+Output/obj/rsa.o: Output/obj/Calc.o rsa.cpp
+	$(CC) $(CFLAGS) -o Output/obj/rsa.o -c rsa.cpp
 
-main: main.o CaesarCipher.o CodeBook.o VigenereCipher.o
-	$(CC) $(CFLAGS) -o main main.o CaesarCipher.o CodeBook.o VigenereCipher.o
+Output/bin/main: Output/obj/main.o Output/obj/CaesarCipher.o Output/obj/CodeBook.o Output/obj/VigenereCipher.o
+	$(CC) $(CFLAGS) -o Output/bin/main Output/obj/main.o Output/obj/CaesarCipher.o Output/obj/CodeBook.o Output/obj/VigenereCipher.o
 
-main.exe: main.o CaesarCipher.o CodeBook.o VigenereCipher.o
-	$(CC) $(CFLAGS) -o main.exe main.o CaesarCipher.o CodeBook.o VigenereCipher.o
+Output/bin/main.exe: Output/obj/main.o Output/obj/CaesarCipher.o Output/obj/CodeBook.o Output/obj/VigenereCipher.o
+	$(CC) $(CFLAGS) -o Output/bin/main.exe Output/obj/main.o Output/obj/CaesarCipher.o Output/obj/CodeBook.o Output/obj/VigenereCipher.o
 
-main.o: CaesarCipher.o main.cpp
-	$(CC) $(CFLAGS) -c main.cpp
+Output/obj/main.o: Output/obj/CaesarCipher.o main.cpp
+	$(CC) $(CFLAGS) -o Output/obj/main.o -c main.cpp
 
-Calc.o: Calc.h Calc.cpp
-	$(CC) $(CFLAGS) -c Calc.cpp
+Output/obj/Calc.o: Calc.h Calc.cpp
+	$(CC) $(CFLAGS) -o Output/obj/Calc.o -c Calc.cpp
 
-CaesarCipher.o: CaesarCipher.h CaesarCipher.cpp CodeBook.o
-	$(CC) $(CFLAGS) -c CaesarCipher.cpp
+Output/obj/CaesarCipher.o: CaesarCipher.h CaesarCipher.cpp Output/obj/CodeBook.o
+	$(CC) $(CFLAGS) -o Output/obj/CaesarCipher.o -c CaesarCipher.cpp
 
-CodeBook.o: CodeBook.h CodeBook.cpp
-	$(CC) $(CFLAGS) -c CodeBook.cpp
+Output/obj/CodeBook.o: CodeBook.h CodeBook.cpp
+	$(CC) $(CFLAGS) -o Output/obj/CodeBook.o -c CodeBook.cpp
 
-VigenereCipher.o: VigenereCipher.h VigenereCipher.cpp
-	$(CC) $(CFLAGS) -c VigenereCipher.cpp
+Output/obj/VigenereCipher.o: VigenereCipher.h VigenereCipher.cpp
+	$(CC) $(CFLAGS) -o Output/obj/VigenereCipher.o -c VigenereCipher.cpp
+
+# Make the output directories
+.PHONY: dirs
+dirs: Output/bin Output/obj
+
+Output/bin:
+	mkdir -p Output/bin
+
+Output/obj:
+	mkdir -p Output/obj
 
 # Clean the entire project
+.PHONY: clean
 clean:
-	-rm rsa
-	-rm primenumber
-	-rm main
-	-rm *.exe
-	-rm *.o
-	-rm -r *.dSYM
+	rm -rf Output
