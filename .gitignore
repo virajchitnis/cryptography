@@ -39,3 +39,7 @@ test_files/
 
 # Error files
 *.dSYM/
+
+# Vagrant files
+.vagrant
+*-cloudimg-console.log
