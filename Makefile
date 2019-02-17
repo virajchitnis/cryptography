@@ -8,6 +8,12 @@ CXXFLAGS=-Wall -pedantic -g -std=c++17 -O3
 CC=$(CXX)
 CFLAGS=$(CXXFLAGS)
 
+# set linux specific compiler flags
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CXXFLAGS+= -static
+endif
+
 # Compile the entire project
 all: rsa primenumber main
 
